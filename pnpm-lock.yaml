@@ -20,18 +20,24 @@ importers:
       name-to-imdb:
         specifier: ^3.0.4
         version: 3.0.4
+      node-cache:
+        specifier: ^5.1.2
+        version: 5.1.2
       opn:
         specifier: ^5.4.0
         version: 5.5.0
-      pify:
-        specifier: ^6.1.0
-        version: 6.1.0
       router:
         specifier: ^1.3.3
         version: 1.3.8
       stremio-addon-sdk:
         specifier: ^1.6.10
         version: 1.6.10
+      translit:
+        specifier: ^0.1.0
+        version: 0.1.0
+      translit-russian:
+        specifier: ^0.0.2
+        version: 0.0.2
       tsx:
         specifier: ^4.19.4
         version: 4.19.4
@@ -268,6 +274,10 @@ packages:
 
   cli-width@2.2.1:
     resolution: {integrity: sha512-GRMWDxpOB6Dgk2E5Uo+3eEBvtOOlimMmpbFiKuLFnQzYDavtLFY3K5ona41jgN/WdRZtG7utuVSVTL4HbZHGkw==}
+
+  clone@2.1.2:
+    resolution: {integrity: sha512-3Pe/CF1Nn94hyhIYpjtiLhdCoEoz0DqQ+988E9gmeEdQZlojxnOb74wctFyuwWQHzqyf9X7C7MG8juUpqBJT8w==}
+    engines: {node: '>=0.8'}
 
   color-convert@1.9.3:
     resolution: {integrity: sha512-QfAUtd+vFdAtFQcC8CCyYt1fYWxSqAiK2cSD6zDB8N3cpsEBAvRxp9zOGg6G/SHHJYAT88/az/IuDGALsNVbGg==}
@@ -537,6 +547,10 @@ packages:
     resolution: {integrity: sha512-+EUsqGPLsM+j/zdChZjsnX51g4XrHFOIXwfnCVPGlQk/k5giakcKsuxCObBRu6DSm9opw/O6slWbJdghQM4bBg==}
     engines: {node: '>= 0.6'}
 
+  node-cache@5.1.2:
+    resolution: {integrity: sha512-t1QzWwnk4sjLWaQAS8CHgOJ+RAfmHpxFWmc36IWTiWHQfs0w5JDMBS1b1ZxQteo0vVVuWJvIUKHDkkeK7vIGCg==}
+    engines: {node: '>= 8.0.0'}
+
   node-fetch@2.7.0:
     resolution: {integrity: sha512-c4FRfUm/dbcWZ7U+1Wq0AwCyFL+3nt2bEw05wfxSz+DWpWsitgmSgYmy2dQdWyKC1694ELPqMs/YzUSNozLt8A==}
     engines: {node: 4.x || >=6.0.0}
@@ -579,10 +593,6 @@ packages:
 
   path-to-regexp@0.1.7:
     resolution: {integrity: sha512-5DFkuoqlv1uYQKxy8omFBeJPQcdoE07Kv2sferDCrAq1ohOU+MSDswDIbnx3YAM60qIOnYa53wBhXW0EbMonrQ==}
-
-  pify@6.1.0:
-    resolution: {integrity: sha512-KocF8ve28eFjjuBKKGvzOBGzG8ew2OqOOSxTTZhirkzH7h3BI1vyzqlR0qbfcDBve1Yzo3FVlWUAtCRrbVN8Fw==}
-    engines: {node: '>=14.16'}
 
   prettier@3.5.3:
     resolution: {integrity: sha512-QQtaxnoDJeAkDvDKWCLiwIXkTgRhwYDEQCghU9Z6q03iyek/rxRh/2lC3HB7P8sWT2xC/y5JDctPLBIGzHKbhw==}
@@ -707,6 +717,12 @@ packages:
 
   tr46@0.0.3:
     resolution: {integrity: sha512-N3WMsuqV66lT30CrXNbEjx4GEwlow3v6rr4mCcv6prnfwhS01rkgyFdjPNBYd9br7LpXV1+Emh01fHnq2Gdgrw==}
+
+  translit-russian@0.0.2:
+    resolution: {integrity: sha512-EnyrQzeoDj2x9r+2Wu3TLBLjoAUp0byE1o37hWM9QxV3VFcapIK38KqL47jxFCo26VctNNhATQSsKAanAkXpvQ==}
+
+  translit@0.1.0:
+    resolution: {integrity: sha512-nBqSS5hZpuAP8f6XgRMc/OgpvjgBU6umzJKjjsgjXJWGgstZhZYmexsQ6zg5shTji0hpZ+v1ekEP9zwSyL17Hw==}
 
   tslib@1.14.1:
     resolution: {integrity: sha512-Xni35NKzjgMrwevysHTCArtLDpPvye8zV/0E4EyYn43P7/7qvQwPh9BGkHewbMulVntbigmcT7rdX3BNo9wRJg==}
@@ -900,6 +916,8 @@ snapshots:
       restore-cursor: 2.0.0
 
   cli-width@2.2.1: {}
+
+  clone@2.1.2: {}
 
   color-convert@1.9.3:
     dependencies:
@@ -1200,6 +1218,10 @@ snapshots:
 
   negotiator@0.6.3: {}
 
+  node-cache@5.1.2:
+    dependencies:
+      clone: 2.1.2
+
   node-fetch@2.7.0:
     dependencies:
       whatwg-url: 5.0.0
@@ -1227,8 +1249,6 @@ snapshots:
   path-to-regexp@0.1.12: {}
 
   path-to-regexp@0.1.7: {}
-
-  pify@6.1.0: {}
 
   prettier@3.5.3: {}
 
@@ -1389,6 +1409,10 @@ snapshots:
   toidentifier@1.0.1: {}
 
   tr46@0.0.3: {}
+
+  translit-russian@0.0.2: {}
+
+  translit@0.1.0: {}
 
   tslib@1.14.1: {}
 

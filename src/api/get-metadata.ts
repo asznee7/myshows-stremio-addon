@@ -1,7 +1,12 @@
 import axios from 'axios'
 import type { MetaDetail } from 'stremio-addon-sdk'
 
-async function getMetadata(
+/**
+ * Get metadata from Cinemeta
+ * @param itemType - The type of item to get metadata for ('series' or 'movie')
+ * @param itemImdbIds - The IMDB IDs of the items to get metadata for
+ */
+export async function getMetadata(
     itemType: 'series' | 'movie',
     itemImdbIds: string[]
 ): Promise<MetaDetail[]> {
@@ -10,5 +15,3 @@ async function getMetadata(
 
     return response.data.metasDetailed
 }
-
-export default getMetadata

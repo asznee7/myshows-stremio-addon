@@ -3,7 +3,7 @@ import { ECatalogId } from './types/types.js'
 
 const addon = new addonBuilder({
     id: 'org.myshowsaddon',
-    name: 'MyShows Stremio Addon',
+    name: 'MyShows Lists',
     version: '1.0.0',
     description:
         'Stremio addon that integrates MyShows.me user profile lists as Stremio catalogs.',
