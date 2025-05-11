@@ -19,6 +19,10 @@ const imdbIdInUrlRegex = /tt\d+/u
 export async function convertMyShowsToStremioMetadata(
     myShowsEntities: MyShowsUserShow[]
 ): Promise<MetaDetail[]> {
+    if (myShowsEntities.length === 0) {
+        return []
+    }
+
     // Try to get IMDB IDs from MyShows
     const { ids: idsFromMyShows, showsWithNoIds } =
         await getImdbIdsFromMyShows(myShowsEntities)
@@ -28,10 +32,8 @@ export async function convertMyShowsToStremioMetadata(
         await resolveImdbIdsByName(showsWithNoIds)
 
     // Get metadata from Cinemeta
-    const metas = await getMetadata('series', [
-        ...idsFromMyShows,
-        ...idsFromImdbSearch,
-    ])
+    const ids = [...idsFromMyShows, ...idsFromImdbSearch]
+    const metas = ids.length > 0 ? await getMetadata('series', ids) : []
 
     // Last resort - get partial metadata from original MyShows entities
     const myshowsMetas: MetaDetail[] = notFoundShows.map((show) => ({
@@ -55,7 +57,6 @@ async function getImdbIdsFromMyShows(
     const parsedFromMyShowsImdbIds = (await getShowsByIds(myshowIds)).reduce(
         (acc, show) => {
             const imdbId = getImdbIdFromShow(show)
-            console.log(imdbId, show.titleOriginal)
             if (!imdbId) {
                 const showWithNoImdbId = myShowsEntities.find(
                     (entity) => entity.show.id === show.id
