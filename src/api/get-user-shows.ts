@@ -7,6 +7,7 @@ const BASE_URL = 'https://api.myshows.me/v3/rpc/'
 
 // Cache for storing show data with 1 hour TTL
 const showsCache = new NodeCache({ stdTTL: 3600 })
+const chunkSize = 10
 
 /**
  * Get user shows from MyShows
@@ -29,7 +30,6 @@ export const getUserShows = async (
  * @param ids - The IDs of the shows to get
  */
 export const getShowsByIds = async (ids: number[]): Promise<Show[]> => {
-    const chunkSize = 10
     const chunks = []
 
     const uncachedIds = ids.filter((id) => !showsCache.has(id))
@@ -41,7 +41,8 @@ export const getShowsByIds = async (ids: number[]): Promise<Show[]> => {
         return cachedShows
     }
 
-    // Split IDs into chunks of 10
+    // Split IDs into chunks of 10 as this is the maximum number of IDs
+    // that can be passed to the API
     for (let i = 0; i < uncachedIds.length; i += chunkSize) {
         chunks.push(uncachedIds.slice(i, i + chunkSize))
     }

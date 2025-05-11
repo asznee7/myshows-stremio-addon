@@ -5,6 +5,8 @@ import { ECatalogId } from '../types/types.js'
 import type { MyShowsUserShow } from '../types/myshows.js'
 import { convertMyShowsToStremioMetadata } from './converters/myshows-to-meta.js'
 
+const pageSize = 100
+
 async function catalogHandler(args: Args): Promise<{ metas: MetaDetail[] }> {
     const { type, id, extra } = args
 
@@ -27,8 +29,12 @@ async function catalogHandler(args: Args): Promise<{ metas: MetaDetail[] }> {
             .includes(extra.search.toLowerCase())
     })
     const watchStatus = getWatchStatusByCatalogId(id)
+
+    const offset = Number(args.extra.skip) || 0
     const metas = await convertMyShowsToStremioMetadata(
-        filteredUserShows.filter((show) => show.watchStatus === watchStatus)
+        filteredUserShows
+            .filter((show) => show.watchStatus === watchStatus)
+            .slice(offset, offset + pageSize)
     )
 
     return {
