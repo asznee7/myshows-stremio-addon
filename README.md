@@ -2,6 +2,8 @@
 
 A Stremio addon that integrates your MyShows profile lists as Stremio catalogs, allowing you to seamlessly access your TV series tracking data within Stremio.
 
+Installation link: https://d882a1b1dbbf-myshows-stremio-addon.baby-beamup.club/configure
+
 ## Features
 
 - Integrates with MyShows.me user profile
@@ -12,14 +14,6 @@ A Stremio addon that integrates your MyShows profile lists as Stremio catalogs, 
     - **Cancelled**: Series you have dropped watching
 
 ![MyShows Stremio Addon Background](https://i.postimg.cc/7LQZNv2g/Screenshot-2025-05-10-204249.png)
-
-## Installation
-
-1. Install Stremio from [stremio.com](https://www.stremio.com)
-2. Open Stremio
-3. Go to the addons section
-4. Click on the "Add Addon" button
-5. Enter the addon URL: `https://your-addon-url/manifest.json`
 
 ## Development
 
