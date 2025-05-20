@@ -46,7 +46,7 @@ export async function convertMyShowsToStremioMetadata(
     return [...metas, ...myshowsMetas]
 }
 
-async function getImdbIdsFromMyShows(
+export async function getImdbIdsFromMyShows(
     myShowsEntities: MyShowsUserShow[]
 ): Promise<{
     ids: string[]

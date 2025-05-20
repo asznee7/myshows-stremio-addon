@@ -2,6 +2,7 @@ import Router from 'router'
 import qs from 'querystring'
 import cors from 'cors'
 import { ECatalogId } from '../types/types.js'
+import { attachMdblistRoutes } from '../mdblist-integration/routes.ts'
 
 function getRouter({ manifest, get }) {
     const router = new Router()
@@ -61,6 +62,8 @@ function getRouter({ manifest, get }) {
         handlersInManifest && handlersInManifest.length
             ? '(' + handlersInManifest.join('|') + ')'
             : ''
+
+    attachMdblistRoutes(router)
 
     // Handle all resources
     router.get(
