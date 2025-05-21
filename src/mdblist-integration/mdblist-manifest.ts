@@ -2,10 +2,15 @@ import { Args } from 'stremio-addon-sdk'
 
 import { getMetadata } from '../api/get-metadata'
 import { getUserShows } from '../api/get-user-shows'
-import { getMdblistList, getMdblistListItems } from '../api/mdblist'
+import {
+    getMdblistByUsernameAndListname,
+    getMdblistList,
+    getMdblistListItems,
+    getMdblistListItemsByUsernameAndListname,
+} from '../api/mdblist'
 import { getImdbIdsFromMyShows } from '../handlers/converters/myshows-to-meta'
 
-const manifestTemplate = {
+export const mdblistManifestTemplate = {
     id: 'org.myshowsaddon.mdblist',
     logo: 'https://i.postimg.cc/K8PL09wv/mdblist-1.png',
     version: '1.0.0',
@@ -30,8 +35,17 @@ const catalogTemplate = {
     name: 'List',
 }
 
-export async function getMdblistManifest(listId: string, apiKey: string) {
-    const lists = await getMdblistList(listId, apiKey)
+export async function getMdblistManifest(
+    apiKey: string,
+    listId?: string,
+    username?: string,
+    listname?: string
+) {
+    const lists = listId
+        ? await getMdblistList(listId, apiKey)
+        : username && listname
+          ? await getMdblistByUsernameAndListname(username, listname, apiKey)
+          : []
     const list = lists.find((list) => list.mediatype === 'show')
 
     if (!list) {
@@ -39,7 +53,7 @@ export async function getMdblistManifest(listId: string, apiKey: string) {
     }
 
     const manifestClone = {
-        ...manifestTemplate,
+        ...mdblistManifestTemplate,
         name: list.name,
         id: `com.myshowsaddon.mdblist.${list.slug}`,
         types: ['series'],
@@ -58,9 +72,11 @@ export async function getMdblistManifest(listId: string, apiKey: string) {
 
 export async function mdblistListCatalogHandler(
     args: Args,
-    listId: string,
     apiKey: string,
-    myshowsUsername?: string
+    myshowsUsername?: string,
+    listId?: string,
+    username?: string,
+    listname?: string
 ) {
     const { type, extra } = args
 
@@ -68,12 +84,17 @@ export async function mdblistListCatalogHandler(
         throw new Error('Not supported catalog type')
     }
 
-    const listItems = await getMdblistListItems(
-        listId,
-        apiKey,
-        100,
-        extra?.skip || 0
-    )
+    const listItems = listId
+        ? await getMdblistListItems(listId, apiKey, 100, extra?.skip || 0)
+        : username && listname
+          ? await getMdblistListItemsByUsernameAndListname(
+                username,
+                listname,
+                apiKey,
+                100,
+                extra?.skip || 0
+            )
+          : { movies: [], shows: [] }
 
     if (!myshowsUsername) {
         const metas = await getMetadata(

@@ -28,6 +28,35 @@ export const getMdblistListItems = async (
 }
 
 /**
+ * Get items from an mdblist list
+ * @param listId - The mdblist list ID or slug
+ * @param apiKey - Your mdblist API key
+ * @param limit - Max number of items to fetch (default 100)
+ */
+export const getMdblistListItemsByUsernameAndListname = async (
+    username: string,
+    listname: string,
+    apiKey: string,
+    limit: number = 100,
+    offset: number = 0
+): Promise<{
+    movies: MdblistListItem[]
+    shows: MdblistListItem[]
+}> => {
+    const response = await axios.get(
+        `${BASE_URL}/lists/${username}/${listname}/items`,
+        {
+            params: {
+                limit,
+                offset,
+                apikey: apiKey,
+            },
+        }
+    )
+    return response.data
+}
+
+/**
  * Get a list from mdblist
  * @param listId - The mdblist list ID
  * @param apiKey - Your mdblist API key
@@ -41,5 +70,27 @@ export const getMdblistList = async (
             apikey: apiKey,
         },
     })
+    return response.data
+}
+
+/**
+ * Get a list from mdblist by username and listname
+ * @param username - The username
+ * @param listname - The listname
+ * @param apiKey - Your mdblist API key
+ */
+export const getMdblistByUsernameAndListname = async (
+    username: string,
+    listname: string,
+    apiKey: string
+): Promise<MdblistList[]> => {
+    const response = await axios.get(
+        `${BASE_URL}/lists/${username}/${listname}`,
+        {
+            params: {
+                apikey: apiKey,
+            },
+        }
+    )
     return response.data
 }

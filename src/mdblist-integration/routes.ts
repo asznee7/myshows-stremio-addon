@@ -11,7 +11,20 @@ export function attachMdblistRoutes(router: Router) {
         '/:listIds/:mdbListKey/:myshowsUsername?/manifest.json',
         async (req: Request, res: Response) => {
             const listIds = (req.params.listIds || '').split(',')
-            if (!listIds.length || listIds.length > 1) {
+            if (!listIds.length) {
+                res.status(500).send('Invalid mDBList list IDs')
+                return
+            }
+
+            let username: string | undefined
+            let listname: string | undefined
+            let listId: string | undefined
+            if (listIds.length === 1) {
+                listId = listIds[0]
+            } else if (listIds.length === 2) {
+                username = listIds[0]
+                listname = listIds[1]
+            } else {
                 res.status(500).send('Invalid mDBList list IDs')
                 return
             }
@@ -24,8 +37,10 @@ export function attachMdblistRoutes(router: Router) {
 
             try {
                 const manifest = await getMdblistManifest(
-                    listIds[0],
-                    mdbListKey
+                    mdbListKey,
+                    listId,
+                    username,
+                    listname
                 )
                 res.json(manifest)
             } catch (error) {
@@ -38,7 +53,20 @@ export function attachMdblistRoutes(router: Router) {
         '/:listIds/:mdbListKey/:myshowsUsername?/catalog/:type/:slug/:extra?.json',
         async (req, res) => {
             const listIds = (req.params.listIds || '').split(',')
-            if (!listIds.length || listIds.length > 1) {
+            if (!listIds.length) {
+                res.status(500).send('Invalid mDBList list IDs')
+                return
+            }
+
+            let username: string | undefined
+            let listname: string | undefined
+            let listId: string | undefined
+            if (listIds.length === 1) {
+                listId = listIds[0]
+            } else if (listIds.length === 2) {
+                username = listIds[0]
+                listname = listIds[1]
+            } else {
                 res.status(500).send('Invalid mDBList list IDs')
                 return
             }
@@ -67,9 +95,11 @@ export function attachMdblistRoutes(router: Router) {
                 } as Args
                 const { metas } = await mdblistListCatalogHandler(
                     args,
-                    listIds[0],
                     mdbListKey,
-                    req.params.myshowsUsername
+                    req.params.myshowsUsername,
+                    listId,
+                    username,
+                    listname,
                 )
 
                 res.json({

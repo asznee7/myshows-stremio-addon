@@ -4,6 +4,8 @@ import path from 'path'
 import landingTemplate from './landingTemplate.js'
 import getRouter from './getRouter.js'
 import opn from 'opn'
+import { mdblistConfigurePageTemplate } from '../mdblist-integration/mdblist-configure-page-template.js'
+import { mdblistManifestTemplate } from '../mdblist-integration/mdblist-manifest.js'
 
 function serveHTTP(addonInterface, opts = {}) {
     if (addonInterface.constructor.name !== 'AddonInterface') {
@@ -40,6 +42,7 @@ function serveHTTP(addonInterface, opts = {}) {
 
     // landing page
     const landingHTML = landingTemplate(addonInterface.manifest)
+    const mdblistHTML = mdblistConfigurePageTemplate(mdblistManifestTemplate)
     app.get('/', (_, res) => {
         if (hasConfig) {
             res.redirect('/configure')
@@ -47,6 +50,11 @@ function serveHTTP(addonInterface, opts = {}) {
             res.setHeader('content-type', 'text/html')
             res.end(landingHTML)
         }
+    })
+
+    app.get('/mdblist', (_, res) => {
+        res.setHeader('content-type', 'text/html')
+        res.end(mdblistHTML)
     })
 
     if (hasConfig)
