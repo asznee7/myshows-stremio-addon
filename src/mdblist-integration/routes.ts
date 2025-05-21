@@ -3,7 +3,7 @@ import qs from 'qs'
 import {
     getMdblistManifest,
     mdblistListCatalogHandler,
-} from './mdblist-manifest'
+} from './mdblist-manifest.js'
 import { Args, ContentType } from 'stremio-addon-sdk'
 
 export function attachMdblistRoutes(router: Router) {

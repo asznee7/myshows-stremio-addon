@@ -1,14 +1,14 @@
 import { Args } from 'stremio-addon-sdk'
 
-import { getMetadata } from '../api/get-metadata'
-import { getUserShows } from '../api/get-user-shows'
+import { getMetadata } from '../api/get-metadata.js'
+import { getUserShows } from '../api/get-user-shows.js'
 import {
     getMdblistByUsernameAndListname,
     getMdblistList,
     getMdblistListItems,
     getMdblistListItemsByUsernameAndListname,
-} from '../api/mdblist'
-import { getImdbIdsFromMyShows } from '../handlers/converters/myshows-to-meta'
+} from '../api/mdblist.js'
+import { getImdbIdsFromMyShows } from '../handlers/converters/myshows-to-meta.js'
 
 export const mdblistManifestTemplate = {
     id: 'org.myshowsaddon.mdblist',
