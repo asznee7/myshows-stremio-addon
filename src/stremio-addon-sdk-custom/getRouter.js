@@ -2,7 +2,7 @@ import Router from 'router'
 import qs from 'querystring'
 import cors from 'cors'
 import { ECatalogId } from '../types/types.js'
-import { attachMdblistRoutes } from '../mdblist-integration/routes.ts'
+import { attachMdblistRoutes } from '../mdblist-integration/routes.js'
 
 function getRouter({ manifest, get }) {
     const router = new Router()
