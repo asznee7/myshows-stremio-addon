@@ -12,6 +12,7 @@ Installation link: https://d882a1b1dbbf-myshows-stremio-addon.baby-beamup.club/c
     - **Later**: Series you plan to watch in the future
     - **Finished**: Series you have completed
     - **Cancelled**: Series you have dropped watching
+- Imports mdlist collections as catalogs, with data filtered from MyShows.
 
 ![MyShows Stremio Addon Background](https://i.postimg.cc/7LQZNv2g/Screenshot-2025-05-10-204249.png)
 
