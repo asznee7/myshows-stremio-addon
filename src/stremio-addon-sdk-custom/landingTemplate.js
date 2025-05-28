@@ -283,6 +283,10 @@ function landingTemplate(manifest) {
 			<button name="Install">INSTALL</button>
 			</a>
 			${contactHTML}
+			<div class="separator"></div>
+			<p>
+				Additionally, you can integrate MDBList lists to Stremio with filtered out shows from MyShows by using this <a href="/mdblist">extension</a>.
+			</p>
 		</div>
 		<script>
 			${script}

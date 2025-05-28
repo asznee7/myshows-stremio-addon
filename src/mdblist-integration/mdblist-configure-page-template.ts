@@ -6,6 +6,32 @@ const STYLESHEET = `
     align-items: center;
     justify-content: center;
 }
+
+.info-box {
+    background: #f8f9fa;
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+    border: 1px solid #e9ecef;
+}
+
+.info-box p {
+    margin: 0.5rem 0;
+}
+
+.info-box ol {
+    margin: 0.5rem 0;
+    padding-left: 1.5rem;
+}
+
+.info-box a {
+    color: #0066cc;
+    text-decoration: none;
+}
+
+.info-box a:hover {
+    text-decoration: underline;
+}
 `
 
 export function mdblistConfigurePageTemplate(manifest: Manifest) {
@@ -63,6 +89,16 @@ export function mdblistConfigurePageTemplate(manifest: Manifest) {
 			<h1>${manifest.name}</h1>
 			<h2>v${manifest.version || '0.0.0'}</h2>
 			<h2>${manifest.description || ''}</h2>
+
+            <div class="info-box">
+                <p>This addon allows you to integrate your MDBList with Stremio, filtering out shows you've already watched on MyShows.</p>
+                <p>To get started:</p>
+                <ol>
+                    <li>Get your MDBList API key from <a href="https://mdblist.com/settings/api" target="_blank">MDBList API Settings</a></li>
+                    <li>Enter either your MDBList username and list name, or directly use a list ID</li>
+                    <li>Enter your MyShows username to filter out watched shows</li>
+                </ol>
+            </div>
 
             <form id="mainForm">
                 <div class="grid">
